@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="وب‌سایت شخصی امیرعرفان بهلولی، دانشجوی کارشناسی ارشد مهندسی هسته‌ای گرایش گداخت در دانشگاه صنعتی امیرکبیر.">
+<meta name="author" content="AmirErfan Bohlouli">
+<meta name="theme-color" content="#0a0014">
+<meta property="og:title" content="Larmor | Plasma Physics & Fusion">
+<meta property="og:description" content="یادداشت‌ها و آموزش‌هایی درباره فیزیک پلاسما، توکامک و انرژی گداخت.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://raw.githubusercontent.com/amirerfanx/larmor/main/logo.png">
+<meta name="twitter:card" content="summary">
+<title>Larmor | Plasma Physics & Fusion</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='9' fill='%23ff00ff'/%3E%3Cellipse cx='50' cy='50' rx='45' ry='18' fill='none' stroke='%238b00ff' stroke-width='5'/%3E%3Cellipse cx='50' cy='50' rx='45' ry='18' fill='none' stroke='%2300ffff' stroke-width='5' transform='rotate(60 50 50)'/%3E%3Cellipse cx='50' cy='50' rx='45' ry='18' fill='none' stroke='%23ff00ff' stroke-width='5' transform='rotate(120 50 50)'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Vazirmatn:wght@300;400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0014; --bg-rgb: 10, 0, 20;
+  --text: #e0e0ff; --text-muted: #8b949e;
+  --purple: #8b00ff; --purple-rgb: 139, 0, 255;
+  --magenta: #ff00ff; --magenta-rgb: 255, 0, 255;
+  --cyan: #00ffff; --cyan-rgb: 0, 255, 255;
+  --white-rgb: 255, 255, 255; --black-rgb: 0, 0, 0;
+  --font-fa: 'Vazirmatn', sans-serif;
+  --font-en: 'Inter', 'Vazirmatn', sans-serif;
+  --font-display: 'Orbitron', sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; text-align: inherit; }
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--purple), var(--magenta)); border-radius: 5px; }
+::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, var(--magenta), var(--cyan)); }
+html[dir="rtl"] body { font-family: var(--font-fa); }
+html[dir="ltr"] body { font-family: var(--font-en); }
+body { background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; position: relative; transition: font-family 0.3s ease; }
+
+.skip-link { position: absolute; top: -60px; right: 10px; background: var(--purple); color: #fff; padding: 10px 18px; border-radius: 8px; z-index: 2000; text-decoration: none; transition: top 0.3s ease; }
+html[dir="ltr"] .skip-link { right: auto; left: 10px; }
+.skip-link:focus { top: 10px; }
+
+body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 20% 50%, rgba(var(--purple-rgb), 0.15) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(var(--magenta-rgb), 0.1) 0%, transparent 50%), radial-gradient(circle at 40% 80%, rgba(var(--cyan-rgb), 0.1) 0%, transparent 50%); animation: plasmaMove 25s ease-in-out infinite alternate; z-index: -1; }
+@keyframes plasmaMove { 0% { transform: scale(1) rotate(0deg); } 100% { transform: scale(1.15) rotate(10deg); } }
+
+.header { text-align: center; padding: 50px 20px 30px; position: relative; }
+.logo-container { margin-bottom: 20px; }
+.logo-image { width: 180px; height: 180px; object-fit: contain; animation: logoFloat 4s ease-in-out infinite; filter: drop-shadow(0 0 25px rgba(var(--purple-rgb), 0.6)); }
+@keyframes logoFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+.logo-text { font-family: var(--font-display); font-size: 4em; font-weight: 900; background: linear-gradient(135deg, var(--magenta), var(--purple), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: 6px; margin-bottom: 10px; filter: drop-shadow(0 0 15px rgba(var(--purple-rgb), 0.5)); }
+.tagline { font-size: 1.4em; color: var(--cyan); letter-spacing: 6px; font-weight: 300; text-shadow: 0 0 15px rgba(var(--cyan-rgb), 0.6); }
+
+.lang-switcher { position: fixed; top: 30px; left: 30px; z-index: 1000; background: rgba(var(--purple-rgb), 0.15); backdrop-filter: blur(5px); border: 1px solid rgba(var(--purple-rgb), 0.5); border-radius: 12px; padding: 10px 18px; color: var(--cyan); font-family: var(--font-display); font-weight: 700; font-size: 0.95em; letter-spacing: 2px; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; }
+html[dir="ltr"] .lang-switcher { left: auto; right: 30px; }
+.lang-switcher:hover { background: rgba(var(--purple-rgb), 0.3); box-shadow: 0 0 25px rgba(var(--purple-rgb), 0.6); transform: scale(1.05); }
+
+.hamburger { position: fixed; top: 30px; right: 30px; width: 55px; height: 55px; z-index: 1000; background: rgba(var(--purple-rgb), 0.15); backdrop-filter: blur(5px); border: 1px solid rgba(var(--purple-rgb), 0.5); border-radius: 12px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 6px; transition: all 0.3s ease; }
+html[dir="ltr"] .hamburger { right: auto; left: 30px; }
+.hamburger:hover { background: rgba(var(--purple-rgb), 0.3); box-shadow: 0 0 25px rgba(var(--purple-rgb), 0.6); transform: scale(1.05); }
+.hamburger span { width: 30px; height: 3px; background: var(--magenta); transition: all 0.3s ease; border-radius: 2px; box-shadow: 0 0 5px var(--magenta); }
+.hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+
+.menu-panel { position: fixed; top: 0; right: -400px; width: 350px; height: 100vh; background: rgba(var(--bg-rgb), 0.95); backdrop-filter: blur(15px); border-left: 1px solid rgba(var(--purple-rgb), 0.3); padding: 100px 30px 30px; transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1); z-index: 999; box-shadow: -10px 0 40px rgba(var(--black-rgb), 0.5); overflow-y: auto; }
+html[dir="ltr"] .menu-panel { right: auto; left: -400px; border-left: none; border-right: 1px solid rgba(var(--purple-rgb), 0.3); box-shadow: 10px 0 40px rgba(var(--black-rgb), 0.5); transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+.menu-panel.active { right: 0; }
+html[dir="ltr"] .menu-panel.active { left: 0; }
+
+.menu-item { width: 100%; padding: 18px 20px; margin-bottom: 15px; background: rgba(var(--white-rgb), 0.03); border: 1px solid rgba(var(--purple-rgb), 0.3); border-radius: 12px; transition: all 0.3s ease; font-size: 1.1em; color: var(--text); display: flex; align-items: center; gap: 15px; }
+.menu-item:hover { background: rgba(var(--purple-rgb), 0.2); border-color: var(--magenta); transform: translateX(-10px); box-shadow: 0 0 20px rgba(var(--magenta-rgb), 0.3); }
+html[dir="ltr"] .menu-item:hover { transform: translateX(10px); }
+.menu-item[aria-current="page"] { border-color: var(--cyan); background: rgba(var(--cyan-rgb), 0.12); }
+.menu-item .number { background: linear-gradient(135deg, var(--magenta), var(--purple)); width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.9em; flex-shrink: 0; box-shadow: 0 0 10px rgba(var(--magenta-rgb), 0.5); }
+
+.content { max-width: 1000px; margin: 0 auto; padding: 20px 20px 80px; min-height: 60vh; }
+.page { display: none; animation: fadeInUp 0.6s ease; }
+.page.active { display: block; }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+.page h2 { font-family: var(--font-display); font-size: 2.5em; background: linear-gradient(135deg, var(--magenta), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 30px; text-align: center; filter: drop-shadow(0 0 10px rgba(var(--purple-rgb), 0.4)); }
+.page-content { background: rgba(var(--white-rgb), 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(var(--purple-rgb), 0.2); border-radius: 20px; padding: 40px; line-height: 2.2; font-size: 1.1em; box-shadow: 0 8px 32px rgba(var(--black-rgb), 0.2); }
+
+.welcome-box { background: rgba(var(--white-rgb), 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(var(--cyan-rgb), 0.2); border-radius: 20px; padding: 40px; text-align: center; margin: 30px auto; max-width: 700px; animation: fadeInUp 1s ease; box-shadow: 0 8px 32px rgba(var(--black-rgb), 0.3); }
+.welcome-box h3 { color: var(--cyan); font-size: 1.8em; margin-bottom: 20px; }
+.welcome-box p { font-size: 1.2em; line-height: 2; color: var(--text); margin-bottom: 10px; }
+.welcome-box .arrow-hint { font-size: 3em; margin-top: 25px; animation: pointUp 2s infinite; display: inline-block; }
+@keyframes pointUp { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(10px, -10px); } }
+
+.articles-intro { text-align: center; margin-bottom: 35px; font-size: 1.15em; color: var(--text-muted); line-height: 1.8; }
+.articles-grid { display: grid; gap: 25px; }
+.article-card, .sim-card { background: rgba(var(--white-rgb), 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(var(--purple-rgb), 0.25); border-radius: 16px; padding: 30px; transition: all 0.3s ease; cursor: pointer; text-align: inherit; width: 100%; display: block; }
+.article-card:hover, .sim-card:hover { border-color: var(--magenta); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(var(--magenta-rgb), 0.25); }
+.article-card:focus-visible, .sim-card:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
+.article-card .article-number, .sim-card .sim-number { display: inline-block; background: linear-gradient(135deg, var(--magenta), var(--purple)); color: #fff; padding: 5px 15px; border-radius: 20px; font-size: 0.85em; font-weight: bold; margin-bottom: 15px; font-family: var(--font-display); }
+.article-card h3, .sim-card h3 { color: var(--cyan); font-size: 1.5em; margin-bottom: 12px; font-family: var(--font-display); line-height: 1.4; }
+.article-card .article-date, .sim-card .sim-date { color: var(--text-muted); font-size: 0.9em; margin-bottom: 15px; display: flex; align-items: center; gap: 6px; }
+.article-card .article-excerpt, .sim-card .sim-excerpt { line-height: 1.8; color: var(--text); margin-bottom: 15px; }
+.article-card .read-more, .sim-card .read-more { color: var(--magenta); font-weight: bold; display: inline-flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 0.95em; }
+.article-card .has-attachment { display: inline-flex; align-items: center; gap: 6px; background: rgba(var(--cyan-rgb), 0.1); color: var(--cyan); padding: 4px 12px; border-radius: 12px; font-size: 0.8em; margin-top: 10px; border: 1px solid rgba(var(--cyan-rgb), 0.3); }
+
+.edu-category { margin-bottom: 35px; }
+.edu-category h3 { color: var(--cyan); font-size: 1.5em; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid rgba(var(--purple-rgb), 0.3); display: flex; align-items: center; gap: 12px; }
+.resource-list { list-style: none; padding: 0; }
+.resource-item { background: rgba(var(--white-rgb), 0.03); border: 1px solid rgba(var(--purple-rgb), 0.2); border-radius: 12px; padding: 18px 22px; margin-bottom: 12px; transition: all 0.3s ease; display: flex; align-items: flex-start; gap: 15px; }
+.resource-item:hover { background: rgba(var(--purple-rgb), 0.12); border-color: var(--magenta); transform: translateX(-5px); }
+html[dir="ltr"] .resource-item:hover { transform: translateX(5px); }
+.resource-item .res-icon { font-size: 1.5em; flex-shrink: 0; min-width: 35px; text-align: center; }
+.resource-item .res-content { flex: 1; }
+.resource-item .res-title { font-weight: bold; color: var(--text); margin-bottom: 5px; font-size: 1.05em; }
+.resource-item .res-desc { color: var(--text-muted); font-size: 0.95em; line-height: 1.7; }
+
+/* Modal Styles */
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); z-index: 2000; display: none; justify-content: center; align-items: flex-start; padding: 30px 15px; overflow-y: auto; opacity: 0; transition: opacity 0.3s ease; }
+.modal-overlay.active { display: flex; opacity: 1; }
+.modal-content { background: rgba(var(--bg-rgb), 0.98); border: 1px solid rgba(var(--purple-rgb), 0.4); border-radius: 20px; max-width: 900px; width: 100%; margin: 20px auto; position: relative; box-shadow: 0 20px 60px rgba(var(--black-rgb), 0.6); transform: translateY(30px); transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); max-height: calc(100vh - 60px); display: flex; flex-direction: column; }
+.modal-overlay.active .modal-content { transform: translateY(0); }
+.modal-header { padding: 35px 35px 20px; border-bottom: 1px solid rgba(var(--purple-rgb), 0.2); position: sticky; top: 0; background: rgba(var(--bg-rgb), 0.98); backdrop-filter: blur(10px); border-radius: 20px 20px 0 0; z-index: 10; }
+.modal-close { position: absolute; top: 20px; left: 20px; width: 40px; height: 40px; background: rgba(var(--magenta-rgb), 0.15); border: 1px solid rgba(var(--magenta-rgb), 0.4); border-radius: 50%; color: var(--magenta); font-size: 1.5em; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; cursor: pointer; }
+html[dir="ltr"] .modal-close { left: auto; right: 20px; }
+.modal-close:hover { background: rgba(var(--magenta-rgb), 0.3); transform: rotate(90deg); }
+.modal-close:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
+.modal-title { font-family: var(--font-display); font-size: 1.8em; background: linear-gradient(135deg, var(--magenta), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 8px; padding-left: 50px; line-height: 1.3; }
+html[dir="ltr"] .modal-title { padding-left: 0; padding-right: 50px; }
+.modal-subtitle { color: var(--text-muted); font-size: 0.95em; font-family: var(--font-display); letter-spacing: 2px; margin-bottom: 10px; }
+.modal-date { color: var(--text-muted); font-size: 0.9em; display: flex; align-items: center; gap: 8px; }
+.modal-body { padding: 30px 35px; overflow-y: auto; line-height: 2; font-size: 1.05em; }
+.modal-body p { margin-bottom: 18px; }
+.modal-body h3 { color: var(--cyan); margin: 25px 0 15px; font-size: 1.4em; font-family: var(--font-display); }
+.modal-body ul, .modal-body ol { margin: 15px 40px 20px; line-height: 2; }
+.modal-body .formula { background: rgba(var(--cyan-rgb), 0.05); border: 1px solid rgba(var(--cyan-rgb), 0.3); padding: 18px; border-radius: 12px; margin: 20px 0; text-align: center; font-family: 'Courier New', monospace; font-size: 1.3em; color: var(--cyan); direction: ltr; }
+.modal-body img { width: 100%; max-width: 100%; border-radius: 12px; margin: 20px 0; border: 1px solid rgba(var(--purple-rgb), 0.3); }
+.modal-footer { padding: 20px 35px 30px; border-top: 1px solid rgba(var(--purple-rgb), 0.2); display: flex; gap: 15px; flex-wrap: wrap; justify-content: flex-end; }
+html[dir="rtl"] .modal-footer { justify-content: flex-start; }
+.download-btn { display: inline-flex; align-items: center; gap: 10px; padding: 12px 24px; background: linear-gradient(135deg, var(--purple), var(--magenta)); color: #fff; border-radius: 12px; text-decoration: none; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 5px 20px rgba(var(--magenta-rgb), 0.3); }
+.download-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(var(--magenta-rgb), 0.5); }
+
+/* Simulator Modal Specific */
+.sim-modal-body { padding: 30px 35px; overflow-y: auto; }
+.sim-modal-body .sim-main-title { font-family: var(--font-display); font-size: 1.6em; background: linear-gradient(135deg, var(--magenta), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 8px; text-align: center; }
+.sim-modal-body .sim-sub-title { text-align: center; color: var(--text-muted); font-family: var(--font-display); letter-spacing: 3px; font-size: 0.95em; margin-bottom: 20px; }
+.sim-intro { text-align: center; color: var(--text); margin-bottom: 25px; line-height: 1.9; font-size: 1em; padding: 15px; background: rgba(var(--purple-rgb), 0.05); border-radius: 12px; border: 1px solid rgba(var(--purple-rgb), 0.2); }
+.sim-credits { text-align: center; color: var(--magenta); font-size: 0.9em; margin-bottom: 25px; font-weight: 600; letter-spacing: 1px; }
+.sim-section-title { color: var(--cyan); font-size: 1.1em; font-weight: bold; margin: 20px 0 12px; padding-bottom: 6px; border-bottom: 1px solid rgba(var(--purple-rgb), 0.3); }
+.sim-params { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; margin-bottom: 20px; }
+.sim-param-box { background: rgba(var(--purple-rgb), 0.05); border: 1px solid rgba(var(--purple-rgb), 0.25); border-radius: 12px; padding: 18px; }
+.sim-param-box .param-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px; }
+.sim-param-box .param-label { color: var(--text); font-weight: 600; font-size: 0.95em; }
+.sim-param-box .param-value { color: var(--magenta); font-weight: bold; font-family: 'Courier New', monospace; font-size: 1.1em; background: rgba(var(--magenta-rgb), 0.1); padding: 3px 10px; border-radius: 6px; }
+.sim-param-box input[type="range"] { width: 100%; accent-color: var(--cyan); cursor: pointer; margin-bottom: 8px; }
+.sim-param-box .param-desc { color: var(--text-muted); font-size: 0.82em; line-height: 1.6; }
+.sim-controls { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; justify-content: center; padding: 15px; background: rgba(var(--white-rgb), 0.02); border-radius: 12px; border: 1px solid rgba(var(--purple-rgb), 0.15); }
+.sim-btn { padding: 11px 22px; background: linear-gradient(135deg, var(--purple), var(--magenta)); color: #fff; border-radius: 10px; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(var(--magenta-rgb), 0.3); font-size: 0.95em; }
+.sim-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(var(--magenta-rgb), 0.5); }
+.sim-btn.secondary { background: rgba(var(--white-rgb), 0.1); box-shadow: none; }
+.sim-btn.secondary:hover { background: rgba(var(--white-rgb), 0.2); }
+.sim-speed-control { display: flex; align-items: center; gap: 8px; color: var(--text-muted); font-size: 0.9em; }
+.sim-speed-control select { background: rgba(var(--white-rgb), 0.1); color: var(--text); border: 1px solid rgba(var(--purple-rgb), 0.3); border-radius: 6px; padding: 6px 10px; font-family: inherit; cursor: pointer; }
+.sim-checkbox { display: flex; align-items: center; gap: 8px; color: var(--text-muted); font-size: 0.9em; cursor: pointer; }
+.sim-checkbox input { accent-color: var(--magenta); width: 16px; height: 16px; cursor: pointer; }
+#simCanvas { width: 100%; height: auto; background: #05000a; border-radius: 12px; border: 1px solid rgba(var(--purple-rgb), 0.3); display: block; margin-bottom: 15px; }
+.sim-legend { display: flex; gap: 20px; margin-bottom: 20px; font-size: 0.85em; color: var(--text-muted); flex-wrap: wrap; justify-content: center; }
+.sim-legend span { display: flex; align-items: center; gap: 6px; }
+.sim-legend .line-cyan { width: 20px; height: 3px; background: var(--cyan); display: inline-block; border-radius: 2px; }
+.sim-legend .line-magenta { width: 20px; height: 3px; border-top: 2px dashed var(--magenta); display: inline-block; }
+.sim-legend .line-orange { width: 20px; height: 3px; border-top: 2px dotted #ff8c00; display: inline-block; }
+.sim-legend .zone-green { width: 15px; height: 10px; background: rgba(0, 255, 100, 0.3); border: 1px solid rgba(0, 255, 100, 0.6); display: inline-block; border-radius: 2px; }
+.sim-results { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 20px; }
+.sim-result-box { background: rgba(var(--cyan-rgb), 0.05); border: 1px solid rgba(var(--cyan-rgb), 0.3); border-radius: 10px; padding: 14px; text-align: center; }
+.sim-result-box .result-label { color: var(--text-muted); font-size: 0.8em; margin-bottom: 6px; }
+.sim-result-box .result-value { color: var(--cyan); font-size: 1.4em; font-weight: bold; font-family: 'Courier New', monospace; }
+.sim-result-box .result-value.error { color: #ff4444; }
+.sim-result-box .result-value.success { color: #00ff88; }
+.sim-footer-note { font-size: 0.78em; color: var(--text-muted); line-height: 1.7; font-style: italic; text-align: center; padding-top: 18px; border-top: 1px solid rgba(var(--purple-rgb), 0.2); }
+
+.plasma-image { width: 100%; max-width: 500px; margin: 30px auto; display: block; border-radius: 15px; border: 1px solid rgba(var(--purple-rgb), 0.4); box-shadow: 0 0 30px rgba(var(--purple-rgb), 0.3); transition: transform 0.3s ease; }
+.plasma-image:hover { transform: scale(1.02); box-shadow: 0 0 40px rgba(var(--purple-rgb), 0.6); }
+.formula { background: rgba(var(--cyan-rgb), 0.05); border: 1px solid rgba(var(--cyan-rgb), 0.3); padding: 20px; border-radius: 12px; margin: 25px 0; text-align: center; font-family: 'Courier New', monospace; font-size: 1.4em; color: var(--cyan); direction: ltr; box-shadow: 0 0 15px rgba(var(--cyan-rgb), 0.1); }
+
+.contact-links { display: flex; flex-direction: column; gap: 20px; margin-top: 30px; }
+.contact-link { display: flex; align-items: center; gap: 20px; padding: 20px; background: rgba(var(--white-rgb), 0.03); border: 1px solid rgba(var(--purple-rgb), 0.2); border-radius: 12px; color: var(--text); text-decoration: none; transition: all 0.3s ease; }
+.contact-link:hover { background: rgba(var(--purple-rgb), 0.15); border-color: var(--magenta); transform: translateX(-10px) scale(1.02); box-shadow: 0 5px 20px rgba(var(--magenta-rgb), 0.2); }
+html[dir="ltr"] .contact-link:hover { transform: translateX(10px) scale(1.02); }
+.contact-link .icon { font-size: 2em; min-width: 40px; text-align: center; }
+
+.footer { text-align: center; padding: 30px; color: var(--text-muted); border-top: 1px solid rgba(var(--purple-rgb), 0.2); margin-top: 50px; background: rgba(var(--black-rgb), 0.3); }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; border-radius: 4px; }
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; } }
+@media (max-width: 768px) {
+  .logo-image { width: 140px; height: 140px; }
+  .logo-text { font-size: 2.5em; letter-spacing: 3px; }
+  .tagline { font-size: 1em; letter-spacing: 3px; }
+  .menu-panel { width: 100%; right: -100%; }
+  html[dir="ltr"] .menu-panel { left: -100%; }
+  .page h2 { font-size: 1.8em; }
+  .welcome-box { margin: 20px 10px; padding: 25px; }
+  .page-content { padding: 25px; }
+  .hamburger { top: 20px; right: 20px; width: 50px; height: 50px; }
+  html[dir="ltr"] .hamburger { right: auto; left: 20px; }
+  .lang-switcher { top: 20px; left: 20px; padding: 8px 14px; font-size: 0.85em; }
+  html[dir="ltr"] .lang-switcher { left: auto; right: 20px; }
+  .article-card, .sim-card { padding: 22px; }
+  .article-card h3, .sim-card h3 { font-size: 1.25em; }
+  .modal-header { padding: 25px 20px 15px; }
+  .modal-title { font-size: 1.3em; padding-left: 40px; }
+  html[dir="ltr"] .modal-title { padding-right: 40px; }
+  .modal-body, .sim-modal-body { padding: 20px; }
+  .modal-footer { padding: 15px 20px 25px; }
+  .modal-close { width: 35px; height: 35px; top: 15px; left: 15px; }
+  html[dir="ltr"] .modal-close { left: auto; right: 15px; }
+  .sim-params { grid-template-columns: 1fr; }
+  .sim-controls { flex-direction: column; }
+  .sim-results { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" data-i18n="skipLink">رفتن به محتوای اصلی</a>
+
+<button type="button" class="lang-switcher" id="langSwitcher" aria-label="تغییر زبان">
+  <span>🌐</span>
+  <span id="langLabel">EN</span>
+</button>
+
+<header class="header">
+  <div class="logo-container">
+    <img src="https://raw.githubusercontent.com/amirerfanx/larmor/main/logo.png" alt="Larmor Logo" class="logo-image" loading="eager" onerror="this.style.display='none';">
+  </div>
+  <h1 class="logo-text">LARMOR</h1>
+  <p class="tagline" data-i18n="tagline">پلاسما. فیزیک. گداخت</p>
+</header>
+
+<button type="button" class="hamburger" id="hamburgerBtn" aria-label="منو" aria-expanded="false" aria-controls="menuPanel" onclick="toggleMenu()">
+  <span></span><span></span><span></span>
+</button>
+
+<nav class="menu-panel" id="menuPanel" aria-label="منوی اصلی" inert>
+  <button type="button" class="menu-item" data-page="home" onclick="showPage('home')">
+    <div class="number"></div>
+    <div data-i18n="menu.home">صفحه اصلی</div>
+  </button>
+  <button type="button" class="menu-item" data-page="larmor" onclick="showPage('larmor')">
+    <div class="number">1</div>
+    <div data-i18n="menu.larmor">لارمور یعنی چی؟</div>
+  </button>
+  <button type="button" class="menu-item" data-page="articles" onclick="showPage('articles')">
+    <div class="number">2</div>
+    <div data-i18n="menu.articles">مقالات</div>
+  </button>
+  <button type="button" class="menu-item" data-page="education" onclick="showPage('education')">
+    <div class="number">3</div>
+    <div data-i18n="menu.education">آموزش</div>
+  </button>
+  <button type="button" class="menu-item" data-page="about" onclick="showPage('about')">
+    <div class="number">4</div>
+    <div data-i18n="menu.about">درباره من</div>
+  </button>
+  <button type="button" class="menu-item" data-page="contact" onclick="showPage('contact')">
+    <div class="number">5</div>
+    <div data-i18n="menu.contact">ارتباط با من</div>
+  </button>
+</nav>
+
+<main class="content" id="main-content">
+
+  <section class="page active" id="page-home" aria-label="خانه">
+    <div class="welcome-box">
+      <h3 data-i18n="welcome.title">👋 خوش آمدید!</h3>
+      <p data-i18n="welcome.p1">سلام، من <strong>امیرعرفان</strong> هستم.</p>
+      <p data-i18n="welcome.p2">برای استفاده از سایت و مشاهده بخش‌های مختلف، لطفاً روی <strong>منوی همبرگری (☰)</strong> در گوشه بالای صفحه کلیک کنید.</p>
+      <div class="arrow-hint">☰ ↗️</div>
+    </div>
+  </section>
+
+  <section class="page" id="page-larmor" aria-label="لارمور">
+    <h2 data-i18n="larmor.title">لارمور چیست؟</h2>
+    <div class="page-content">
+      <p data-i18n="larmor.p1"><strong>فرکانس لارمور</strong> (Larmor Frequency) یکی از مفاهیم بنیادی در فیزیک پلاسما و فیزیک ذرات باردار است. این فرکانس به سرعت چرخش ذرات باردار (الکترون‌ها و یون‌ها) در اطراف خطوط میدان مغناطیسی اشاره دارد.</p>
+      <div class="formula">ω_L = qB / m</div>
+      <p data-i18n="larmor.where">که در آن:</p>
+      <ul style="margin: 20px 40px; line-height: 2.5;">
+        <li><strong>ω_L</strong>: <span data-i18n="larmor.var1">فرکانس زاویه‌ای لارمور (رادیان بر ثانیه)</span></li>
+        <li><strong>q</strong>: <span data-i18n="larmor.var2">بار الکتریکی ذره (کولن)</span></li>
+        <li><strong>B</strong>: <span data-i18n="larmor.var3">شدت میدان مغناطیسی (تسلا)</span></li>
+        <li><strong>m</strong>: <span data-i18n="larmor.var4">جرم ذره (کیلوگرم)</span></li>
+      </ul>
+      <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800" alt="Plasma Physics" class="plasma-image" loading="lazy" decoding="async">
+      <p data-i18n="larmor.p2"><strong>شعاع لارمور</strong> (Larmor Radius یا Gyroradius) شعاع دایره‌ای است که ذره باردار در میدان مغناطیسی طی می‌کند:</p>
+      <div class="formula">r_L = mv / qB</div>
+      <p data-i18n="larmor.p3">این مفاهیم در طراحی توکامک‌ها و استلراتورها برای محصورسازی پلاسما بسیار حیاتی هستند. در رآکتورهای گداخت مانند ITER، میدان‌های مغناطیسی قوی برای نگه داشتن پلاسمای داغ (بیش از ۱۰۰ میلیون درجه) استفاده می‌شوند و فرکانس لارمور تعیین می‌کند که ذرات چقدر سریع دور خطوط میدان می‌چرخند.</p>
+      <img src="https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=800" alt="Magnetic Confinement" class="plasma-image" loading="lazy" decoding="async">
+    </div>
+  </section>
+
+  <section class="page" id="page-articles" aria-label="مقالات">
+    <h2 data-i18n="articles.title">مقالات</h2>
+    <div class="page-content">
+      <p class="articles-intro" data-i18n="articles.intro">یادداشت‌ها و مقالات علمی من درباره فیزیک پلاسما و انرژی گداخت. برای مطالعه کامل، روی هر مقاله کلیک کنید:</p>
+      <div class="articles-grid" id="articlesGrid"></div>
+    </div>
+  </section>
+
+  <section class="page" id="page-education" aria-label="آموزش">
+    <h2 data-i18n="education.title">آموزش</h2>
+    <div class="page-content">
+      <p class="articles-intro" data-i18n="education.intro">منابع و ابزارهای پیشنهادی برای یادگیری فیزیک پلاسما و مهندسی گداخت:</p>
+
+      <div class="edu-category">
+        <h3><span>📚</span> <span data-i18n="education.books.title">کتاب‌های مرجع</span></h3>
+        <ul class="resource-list">
+          <li class="resource-item"><span class="res-icon">📖</span><div class="res-content"><div class="res-title">Introduction to Plasma Physics and Controlled Fusion</div><div class="res-desc" data-i18n="education.books.b1.desc">نوشته Francis F. Chen - کتاب کلاسیک و استاندارد برای شروع یادگیری فیزیک پلاسما.</div></div></li>
+          <li class="resource-item"><span class="res-icon">📖</span><div class="res-content"><div class="res-title">Principles of Plasma Physics</div><div class="res-desc" data-i18n="education.books.b2.desc">نوشته Nicholas A. Krall و Albert W. Trivelpiece - مرجع کامل‌تر برای مباحث پیشرفته.</div></div></li>
+          <li class="resource-item"><span class="res-icon">📖</span><div class="res-content"><div class="res-title">Introduction to Plasma Physics</div><div class="res-desc" data-i18n="education.books.b3.desc">نوشته R. J. Goldston و P. H. Rutherford - مرجع تخصصی برای MHD و توکامک‌ها.</div></div></li>
+        </ul>
+      </div>
+
+      <div class="edu-category">
+        <h3><span>🎓</span> <span data-i18n="education.courses.title">دوره‌های آنلاین</span></h3>
+        <ul class="resource-list">
+          <li class="resource-item"><span class="res-icon"></span><div class="res-content"><div class="res-title">MIT OpenCourseWare - Plasma Physics</div><div class="res-desc" data-i18n="education.courses.c1.desc">دوره رایگان MIT با ویدیوهای آموزشی کامل.</div></div></li>
+          <li class="resource-item"><span class="res-icon">🌐</span><div class="res-content"><div class="res-title">IAEA Fusion Energy Lectures</div><div class="res-desc" data-i18n="education.courses.c2.desc">سخنرانی‌های آژانس بین‌المللی انرژی اتمی درباره انرژی گداخت.</div></div></li>
+          <li class="resource-item"><span class="res-icon">🌐</span><div class="res-content"><div class="res-title">Coursera - Nuclear Energy</div><div class="res-desc" data-i18n="education.courses.c3.desc">دوره جامع انرژی هسته‌ای با بخش‌های تخصصی درباره گداخت.</div></div></li>
+        </ul>
+      </div>
+
+      <div class="edu-category">
+        <h3><span>⚙️</span> <span data-i18n="education.software.title">نرم‌افزارهای تخصصی</span></h3>
+        <ul class="resource-list">
+          <li class="resource-item"><span class="res-icon">💻</span><div class="res-content"><div class="res-title">Python + NumPy/SciPy</div><div class="res-desc" data-i18n="education.software.s1.desc">زبان اصلی برای تحلیل داده‌های پلاسما و شبیه‌سازی عددی.</div></div></li>
+          <li class="resource-item"><span class="res-icon">💻</span><div class="res-content"><div class="res-title">COMSOL Multiphysics</div><div class="res-desc" data-i18n="education.software.s2.desc">شبیه‌سازی چندفیزیکی برای میدان‌های الکترومغناطیسی و حرارتی.</div></div></li>
+          <li class="resource-item"><span class="res-icon">💻</span><div class="res-content"><div class="res-title">BOUT++</div><div class="res-desc" data-i18n="education.software.s3.desc">کد متن‌باز برای شبیه‌سازی پلاسمای لبه‌ای در توکامک‌ها.</div></div></li>
+          <li class="resource-item"><span class="res-icon">💻</span><div class="res-content"><div class="res-title">MATLAB</div><div class="res-desc" data-i18n="education.software.s4.desc">ابزار قدرتمند برای پردازش سیگنال و تحلیل داده‌های آزمایشگاهی.</div></div></li>
+        </ul>
+      </div>
+
+      <!-- Simulation Card -->
+      <div class="edu-category">
+        <h3><span>💻</span> <span data-i18n="education.simulation.title">شبیه‌سازی</span></h3>
+        <div class="articles-grid" id="simGrid"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="page" id="page-about" aria-label="درباره من">
+    <h2 data-i18n="about.title">درباره من</h2>
+    <div class="page-content">
+      <p data-i18n="about.p1">سلام! من <strong>امیرعرفان</strong> هستم، دانشجوی کارشناسی ارشد مهندسی هسته‌ای با گرایش گداخت هسته‌ای در دانشگاه صنعتی امیرکبیر (پلی‌تکنیک تهران).</p>
+      <br>
+      <p data-i18n="about.p2">علاقه‌مندی‌های تحقیقاتی من شامل فیزیک پلاسما، دستگاه‌های توکامک و استلراتور، ناپایداری‌های MHD، پیش‌بینی Disruption و کنترل بلادرنگ در رآکتورهای گداخت است.</p>
+      <br>
+      <p data-i18n="about.p3">هدف من مشارکت در توسعه انرژی گداخت به عنوان یک منبع انرژی پاک و پایدار برای آینده بشریت است. گداخت هسته‌ای همان فرآیندی است که خورشید و ستارگان از آن انرژی می‌گیرند، و ما در تلاشیم این فرآیند را روی زمین شبیه‌سازی کنیم.</p>
+      <br>
+      <p><strong data-i18n="about.eduTitle">تحصیلات:</strong></p>
+      <ul style="margin: 20px 40px; line-height: 2.5;">
+        <li data-i18n="about.edu1">کارشناسی ارشد مهندسی هسته‌ای - گداخت | دانشگاه امیرکبیر (۱۴۰۲ - اکنون)</li>
+        <li data-i18n="about.edu2">کارشناسی فیزیک مهندسی | دانشگاه تبریز (۱۹۸ - ۱۴۲)</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="page" id="page-contact" aria-label="ارتباط با من">
+    <h2 data-i18n="contact.title">ارتباط با من</h2>
+    <div class="page-content">
+      <p style="text-align: center; margin-bottom: 30px;" data-i18n="contact.intro">همیشه آماده همکاری‌های علمی و پژوهشی هستم. از طریق راه‌های زیر می‌توانید با من در ارتباط باشید:</p>
+      <div class="contact-links">
+        <a href="https://github.com/amirerfanx" target="_blank" rel="noopener noreferrer" class="contact-link">
+          <span class="icon">💻</span>
+          <div><strong>GitHub</strong><br><span style="color: var(--text-muted); font-size: 0.9em;">amirerfanx</span></div>
+        </a>
+        <a href="https://www.linkedin.com/in/amirerfanbohlouli" target="_blank" rel="noopener noreferrer" class="contact-link">
+          <span class="icon">🔗</span>
+          <div><strong>LinkedIn</strong><br><span style="color: var(--text-muted); font-size: 0.9em;">AmirErfan Bohlouli</span></div>
+        </a>
+        <a href="https://t.me/amirerfanx" target="_blank" rel="noopener noreferrer" class="contact-link">
+          <span class="icon">@</span>
+          <div><strong>Telegram</strong><br><span style="color: var(--text-muted); font-size: 0.9em;">@amirerfanx</span></div>
+        </a>
+        <a href="mailto:amirerfanbohlouli@gmail.com" class="contact-link">
+          <span class="icon"></span>
+          <div><strong>Email</strong><br><span style="color: var(--text-muted); font-size: 0.9em;">amirerfanbohlouli@gmail.com</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Article Modal -->
+<div class="modal-overlay" id="articleModal" role="dialog" aria-modal="true" aria-labelledby="articleModalTitle" inert>
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="modal-close" id="articleModalClose" aria-label="بستن">✕</button>
+      <h2 class="modal-title" id="articleModalTitle"></h2>
+      <div class="modal-date" id="articleModalDate"></div>
+    </div>
+    <div class="modal-body" id="articleModalBody"></div>
+    <div class="modal-footer" id="articleModalFooter"></div>
+  </div>
+</div>
+
+<!-- Simulator Modal -->
+<div class="modal-overlay" id="simModal" role="dialog" aria-modal="true" aria-labelledby="simModalTitle" inert>
+  <div class="modal-content" style="max-width: 950px;">
+    <div class="modal-header">
+      <button type="button" class="modal-close" id="simModalClose" aria-label="بستن">✕</button>
+      <h2 class="modal-title" id="simModalTitle"></h2>
+      <div class="modal-subtitle" id="simModalSubtitle"></div>
+    </div>
+    <div class="sim-modal-body" id="simModalBody"></div>
+  </div>
+</div>
+
+<footer class="footer">
+  <p>© <span id="year"></span> Larmor | <span data-i18n="footer.tagline">پژوهش فیزیک پلاسما و گداخت</span></p>
+</footer>
+
+<script>
+// ===== TRANSLATIONS =====
+const translations = {
+  fa: {
+    title: 'Larmor | فیزیک پلاسما و گداخت', tagline: 'پلاسما. فیزیک. گداخت', skipLink: 'رفتن به محتوای اصلی',
+    menu: { home: 'صفحه اصلی', larmor: 'لارمور یعنی چی؟', articles: 'مقالات', education: 'آموزش', about: 'درباره من', contact: 'ارتباط با من' },
+    welcome: { title: '👋 خوش آمدید!', p1: 'سلام، من <strong>امیرعرفان</strong> هستم.', p2: 'برای استفاده از سایت و مشاهده بخش‌های مختلف، لطفاً روی <strong>منوی همبرگری (☰)</strong> در گوشه بالای صفحه کلیک کنید.' },
+    larmor: { title: 'لارمور چیست؟', p1: '<strong>فرکانس لارمور</strong> (Larmor Frequency) یکی از مفاهیم بنیادی در فیزیک پلاسما و فیزیک ذرات باردار است. این فرکانس به سرعت چرخش ذرات باردار (الکترون‌ها و یون‌ها) در اطراف خطوط میدان مغناطیسی اشاره دارد.', where: 'که در آن:', var1: 'فرکانس زاویه‌ای لارمور (رادیان بر ثانیه)', var2: 'بار الکتریکی ذره (کولن)', var3: 'شدت میدان مغناطیسی (تسلا)', var4: 'جرم ذره (کیلوگرم)', p2: '<strong>شعاع لارمور</strong> (Larmor Radius یا Gyroradius) شعاع دایره‌ای است که ذره باردار در میدان مغناطیسی طی می‌کند:', p3: 'این مفاهیم در طراحی توکامک‌ها و استلراتورها برای محصورسازی پلاسما بسیار حیاتی هستند. در رآکتورهای گداخت مانند ITER، میدان‌های مغناطیسی قوی برای نگه داشتن پلاسمای داغ (بیش از ۱۰ میلیون درجه) استفاده می‌شوند و فرکانس لارمور تعیین می‌کند که ذرات چقدر سریع دور خطوط میدان می‌چرخند.' },
+    articles: { title: 'مقالات', intro: 'یادداشت‌ها و مقالات علمی من درباره فیزیک پلاسما و انرژی گداخت. برای مطالعه کامل، روی هر مقاله کلیک کنید:', readMore: 'مطالعه کامل ←', hasFile: '📎 فایل پیوست', download: '📥 دانلود PDF مقاله', dateLabel: '📅 تاریخ:' },
+    education: { 
+      title: 'آموزش', intro: 'منابع و ابزارهای پیشنهادی برای یادگیری فیزیک پلاسما و مهندسی گداخت:', 
+      books: { title: 'کتاب‌های مرجع', b1: { desc: 'نوشته Francis F. Chen - کتاب کلاسیک و استاندارد برای شروع یادگیری فیزیک پلاسما.' }, b2: { desc: 'نوشته Nicholas A. Krall و Albert W. Trivelpiece - مرجع کامل‌تر برای مباحث پیشرفته.' }, b3: { desc: 'نوشته R. J. Goldston و P. H. Rutherford - مرجع تخصصی برای MHD و توکامک‌ها.' } }, 
+      courses: { title: 'دوره‌های آنلاین', c1: { desc: 'دوره رایگان MIT با ویدیوهای آموزشی کامل.' }, c2: { desc: 'سخنرانی‌های آژانس بین‌المللی انرژی اتمی درباره انرژی گداخت.' }, c3: { desc: 'دوره جامع انرژی هسته‌ای با بخش‌های تخصصی درباره گداخت.' } }, 
+      software: { title: 'نرم‌افزارهای تخصصی', s1: { desc: 'زبان اصلی برای تحلیل داده‌های پلاسما و شبیه‌سازی عددی.' }, s2: { desc: 'شبیه‌سازی چندفیزیکی برای میدان‌های الکترومغناطیسی و حرارتی.' }, s3: { desc: 'کد متن‌باز برای شبیه‌سازی پلاسمای لبه‌ای در توکامک‌ها.' }, s4: { desc: 'ابزار قدرتمند برای پردازش سیگنال و تحلیل داده‌های آزمایشگاهی.' } },
+      simulation: {
+        title: 'شبیه‌سازی',
+        langmuir: {
+          title: 'شبیه‌ساز پروب لانگمویر',
+          subtitle: 'Langmuir Probe · Stepped Supply & DAQ',
+          desc: 'نمایش زنده‌: تبدیل جریان جابجایی خازن سرگردان از یک خطای پیوسته و دائمی، به یک گذرای مقطعی قابل‌مدیریت با کنترل دقیق زمان نشست (RC) روی هر پله‌ی ولتاژ.',
+          readMore: 'اجرای شبیه‌ساز ←',
+          credits: 'ساخته شده توسط امیرعرفان',
+          plasmaSection: 'پلاسمای فرضی (مقادیر واقعی)',
+          teLabel: 'دمای الکترون Te',
+          teDesc: 'چگالی، دامنه‌ی جریان اشباع یونی و الکترونی منحنی I-V را تعیین می‌کند.',
+          neLabel: 'چگالی نسبی پلاسما (ne)',
+          capacitorSection: 'خازن سرگردان مدار',
+          tauLabel: 'ثابت زمانی τ = R·C',
+          tauDesc: 'هرچه خازن سرگردان کابل‌ها یا امپدانس خروجی بزرگ‌تر باشد، τ بزرگ‌تر و افت جریان گذرا کندتر است.',
+          dwellLabel: 'زمان مکث نمونه‌برداری',
+          dwellDesc: 'قانون سرانگشتی: پس از ۵τ، خازن >۹۹٪ نشسته و جریان گذرا عملاً حذف شده است.',
+          btnContinuous: '▶ روبش پیوسته (بدون انتظار نشست)',
+          btnStepped: '▶ روبش پله‌ای (با انتظار تنظیم‌شده)',
+          speedLabel: 'سرعت انیمیشن',
+          speedFast: 'سریع',
+          speedMedium: 'متوسط',
+          speedSlow: 'آهسته',
+          btnClear: 'پاک‌کردن نمودار',
+          statusReady: 'آماده برای شروع روبش',
+          statusRunning: 'در حال روبش...',
+          statusDone: 'روبش کامل شد',
+          chartTitle: 'منحنی مشخصه‌ی I –V پروب',
+          legendPlasma: 'منحنی واقعی پلاسما',
+          legendContinuous: 'روبش پیوسته (بدون انتظار)',
+          legendStepped: 'روبش پله‌ای (با انتظار ۵τ)',
+          legendCapacitor: 'جریان جابجایی خازن سرگردان — پاسخ گذرای هر پله',
+          legendSampling: 'ناحیه نمونه‌برداری زودهنگام',
+          legendSettled: 'پس از ۵τ (نشست کامل)',
+          resultTeActual: 'Te واقعی (ورودی)',
+          resultTeContinuous: 'Te برآوردی — روبش پیوسته',
+          resultTeStepped: 'Te برآوردی — روبش پله‌ای',
+          footer: 'این ابزار یک شبیه‌سازی آموزشی و مفهومی سبک است (اجرا در مرورگر، بدون نیاز به اینترنت)، نه یک شبیه‌سازی دقیق مداری (SPICE). مدل منحنی I-V بر پایه‌ی رابطه‌ی نمایی ماکسولی ساده‌شده و مدل جریان گذرای خازنی بر پایه‌ی Ic = C·dV/dt با افت نمایی exp(−t/τ) بنا شده است. نسبت جریان اشباع الکترونی به یونی برای وضوح بصری نمودار، کوچک‌تر از مقدار فیزیکی واقعی (∝√(mᵢ/mₑ)) در نظر گرفته شده است.'
+        }
+      }
+    },
+    about: { title: 'درباره من', p1: 'سلام! من <strong>امیرعرفان</strong> هستم، دانشجوی کارشناسی ارشد مهندسی هسته‌ای با گرایش گداخت هسته‌ای در دانشگاه صنعتی امیرکبیر (پلی‌تکنیک تهران).', p2: 'علاقه‌مندی‌های تحقیقاتی من شامل فیزیک پلاسما، دستگاه‌های توکامک و استلراتور، ناپایداری‌های MHD، پیش‌بینی Disruption و کنترل بلادرنگ در رآکتورهای گداخت است.', p3: 'هدف من مشارکت در توسعه انرژی گداخت به عنوان یک منبع انرژی پاک و پایدار برای آینده بشریت است. گداخت هسته‌ای همان فرآیندی است که خورشید و ستارگان از آن انرژی می‌گیرند، و ما در تلاشیم این فرآیند را روی زمین شبیه‌سازی کنیم.', eduTitle: 'تحصیلات:', edu1: 'کارشناسی ارشد مهندسی هسته‌ای - گداخت | دانشگاه امیرکبیر (۱۴۰۲ - اکنون)', edu2: 'کارشناسی فیزیک مهندسی | دانشگاه تبریز (۱۳۸ - ۱۴۰)' },
+    contact: { title: 'ارتباط با من', intro: 'همیشه آماده همکاری‌های علمی و پژوهشی هستم. از طریق راه‌های زیر می‌توانید با من در ارتباط باشید:' },
+    footer: { tagline: 'پژوهش فیزیک پلاسما و گداخت' }, modalClose: 'بستن'
+  },
+  en: {
+    title: 'Larmor | Plasma Physics & Fusion', tagline: 'Plasma. Physics. Fusion.', skipLink: 'Skip to main content',
+    menu: { home: 'Home', larmor: 'What is Larmor?', articles: 'Articles', education: 'Education', about: 'About Me', contact: 'Contact' },
+    welcome: { title: '👋 Welcome!', p1: 'Hi, I\'m <strong>AmirErfan</strong>.', p2: 'To explore the site, please click on the <strong>hamburger menu (☰)</strong> at the top corner of the page.' },
+    larmor: { title: 'What is Larmor?', p1: 'The <strong>Larmor Frequency</strong> is one of the fundamental concepts in plasma physics and charged particle physics. It refers to the rate at which charged particles (electrons and ions) gyrate around magnetic field lines.', where: 'Where:', var1: 'Larmor angular frequency (rad/s)', var2: 'Electric charge of the particle (Coulombs)', var3: 'Magnetic field strength (Tesla)', var4: 'Mass of the particle (kg)', p2: 'The <strong>Larmor Radius</strong> (or Gyroradius) is the radius of the circular path a charged particle follows in a magnetic field:', p3: 'These concepts are crucial in the design of tokamaks and stellarators for plasma confinement. In fusion reactors like ITER, strong magnetic fields are used to contain hot plasma (over 100 million degrees), and the Larmor frequency determines how fast particles gyrate around the field lines.' },
+    articles: { title: 'Articles', intro: 'My notes and scientific articles about plasma physics and fusion energy. Click on any article to read the full content:', readMore: 'Read more →', hasFile: '📎 Attachment', download: '📥 Download PDF', dateLabel: ' Date:' },
+    education: { 
+      title: 'Education', intro: 'Recommended resources and tools for learning plasma physics and fusion engineering:', 
+      books: { title: 'Reference Books', b1: { desc: 'By Francis F. Chen - The classic and standard textbook for starting plasma physics.' }, b2: { desc: 'By Nicholas A. Krall and Albert W. Trivelpiece - A more comprehensive reference for advanced topics.' }, b3: { desc: 'By R. J. Goldston and P. H. Rutherford - A specialized reference for MHD and tokamaks.' } }, 
+      courses: { title: 'Online Courses', c1: { desc: 'Free MIT course with complete video lectures.' }, c2: { desc: 'Lectures by the International Atomic Energy Agency on fusion energy.' }, c3: { desc: 'Comprehensive nuclear energy course with specialized sections on fusion.' } }, 
+      software: { title: 'Specialized Software', s1: { desc: 'The main programming language for plasma data analysis and numerical simulation.' }, s2: { desc: 'Multiphysics simulation software for modeling electromagnetic and thermal fields.' }, s3: { desc: 'Open-source code for simulating edge plasma in tokamaks.' }, s4: { desc: 'Powerful tool for signal processing and experimental data analysis.' } },
+      simulation: {
+        title: 'Simulation',
+        langmuir: {
+          title: 'Langmuir Probe Simulator',
+          subtitle: 'Langmuir Probe · Stepped Supply & DAQ',
+          desc: 'Live demonstration : converting stray capacitance displacement current from a continuous permanent error into a manageable transient with precise settling time (RC) control on each voltage step.',
+          readMore: 'Run Simulator →',
+          credits: 'Built by AmirErfan',
+          plasmaSection: 'Hypothetical Plasma (Real Values)',
+          teLabel: 'Electron Temperature Te',
+          teDesc: 'Determines density, ion and electron saturation current amplitudes of the I-V curve.',
+          neLabel: 'Relative Plasma Density (ne)',
+          capacitorSection: 'Circuit Stray Capacitance',
+          tauLabel: 'Time Constant τ = R·C',
+          tauDesc: 'The larger the stray capacitance of cables or output impedance, the larger τ and the slower the transient current decay.',
+          dwellLabel: 'Sampling Dwell Time',
+          dwellDesc: 'Rule of thumb: after 5τ, the capacitor is >99% settled and transient current is virtually eliminated.',
+          btnContinuous: '▶ Continuous Sweep (no settling wait)',
+          btnStepped: '▶ Stepped Sweep (with configured wait)',
+          speedLabel: 'Animation Speed',
+          speedFast: 'Fast',
+          speedMedium: 'Medium',
+          speedSlow: 'Slow',
+          btnClear: 'Clear Plot',
+          statusReady: 'Ready to start sweep',
+          statusRunning: 'Sweeping...',
+          statusDone: 'Sweep complete',
+          chartTitle: 'Probe I–V Characteristic Curve',
+          legendPlasma: 'True Plasma Curve',
+          legendContinuous: 'Continuous Sweep (no wait)',
+          legendStepped: 'Stepped Sweep (with 5τ wait)',
+          legendCapacitor: 'Stray Capacitor Displacement Current — Transient Response per Step',
+          legendSampling: 'Early Sampling Region',
+          legendSettled: 'After 5τ (Fully Settled)',
+          resultTeActual: 'Actual Te (Input)',
+          resultTeContinuous: 'Estimated Te — Continuous Sweep',
+          resultTeStepped: 'Estimated Te — Stepped Sweep',
+          footer: 'This is a lightweight educational and conceptual simulation (runs in browser, no internet required), not a precise circuit simulation (SPICE). The I-V curve model is based on a simplified Maxwellian exponential relation, and the capacitive transient current is modeled as Ic = C·dV/dt with exponential decay exp(−t/τ). The electron-to-ion saturation current ratio is set smaller than the physical value (∝√(mᵢ/mₑ)) for visual clarity of the plot.'
+        }
+      }
+    },
+    about: { title: 'About Me', p1: 'Hi! I\'m <strong>AmirErfan</strong>, an MSc student in Nuclear Engineering with a focus on Nuclear Fusion at Amirkabir University of Technology (Tehran Polytechnic).', p2: 'My research interests include plasma physics, tokamak and stellarator devices, MHD instabilities, disruption prediction, and real-time control in fusion reactors.', p3: 'My goal is to contribute to the development of fusion energy as a clean and sustainable power source for the future of humanity. Nuclear fusion is the same process that powers the Sun and the stars, and we are working to replicate this process on Earth.', eduTitle: 'Education:', edu1: 'MSc in Nuclear Engineering – Fusion | Amirkabir University (2023 – Present)', edu2: 'BSc in Engineering Physics | University of Tabriz (2019 – 2023)' },
+    contact: { title: 'Contact Me', intro: 'I\'m always open to scientific and research collaborations. You can reach me through the following channels:' },
+    footer: { tagline: 'Plasma Physics & Fusion Research' }, modalClose: 'Close'
+  }
+};
+
+// ===== ARTICLES DATA =====
+const articlesData = [
+  {
+    id: 'langmuir-probe-chen',
+    fa: {
+      title: 'درسنامه‌ای بر تشخیص با پروب لانگمیر',
+      date: '۱۴۳',
+      excerpt: 'پروب لانگمیر یکی از ساده‌ترین و در عین حال قدرتمندترین ابزارها برای اندازه‌گیری ویژگی‌های پلاسماست. این درسنامه توسط پروفسور فرانسیس اف. چن نوشته شده است.',
+      content: `<p><strong>منبع و نویسنده:</strong> مجموعه درسنامه از گروه مهندسی برق، دانشگاه کالیفرنیا، لس‌آنجلس (UCLA) توسط پروفسور فرانسیس اف. چن (Francis F. Chen)، یکی از برجسته‌ترین چهره‌های جهانی در زمینه فیزیک پلاسما.</p><h3>چکیده‌ای به زبان ساده</h3><p>پروب لانگمیر یکی از ساده‌ترین و در عین حال قدرتمندترین ابزارها برای اندازه‌گیری ویژگی‌های پلاسماست. این درسنامه به طور کامل به اصول طراحی، عملکرد و تحلیل داده‌های پروب لانگمیر می‌پردازد.</p><h3>نوآوری و نکات برجسته</h3><ul><li><strong>پوشش جامع نظریه‌های جمع‌آوری یون:</strong> از نظریه‌ی کلاسیک OML گرفته تا نظریه‌های پیشرفته‌تر ABR و BRL.</li><li><strong>تمرکز ویژه بر پلاسماهای فرکانس‌رادیویی (RF):</strong> روش‌های جبران RF و طراحی مدارهای مناسب.</li><li><strong>روش‌های عملی و تحلیلی:</strong> الگوریتم‌های عددی و روش‌های برازش منحنی برای استخراج پارامترهایی مانند دمای الکترون و چگالی.</li></ul><h3>اهمیت در حوزه گداخت</h3><p>در پروژه‌های گداخت هسته‌ای مانند توکامک‌ها، اندازه‌گیری دقیق پارامترهای پلاسما برای کنترل و بهینه‌سازی حیاتی است. این درسنامه به پژوهشگران کمک می‌کند تا داده‌های پروب خود را با دقت بالاتری تحلیل کنند.</p>`,
+      file: { name: 'دانلود PDF مقاله', url: 'https://raw.githubusercontent.com/amirerfanx/larmor/main/Langmuir%20Probe%20Diagnostics%20-%20F.F.Chen.pdf' }
+    },
+    en: {
+      title: 'Lecture Notes on Langmuir Probe Diagnostics',
+      date: '2024',
+      excerpt: 'The Langmuir probe is one of the simplest yet most powerful tools for measuring plasma properties, authored by Prof. Francis F. Chen.',
+      content: `<p><strong>Source & Author:</strong> Lecture notes from the Electrical Engineering Department, UCLA, by Professor Francis F. Chen, one of the world's foremost experts in plasma physics.</p><h3>Plain Language Summary</h3><p>The Langmuir probe is one of the simplest yet most powerful tools for measuring plasma properties. These lecture notes provide a complete guide to the principles, design, and data analysis of Langmuir probes.</p><h3>Key Innovations & Highlights</h3><ul><li><strong>Comprehensive coverage of ion collection theories:</strong> From classic OML theory to sophisticated ABR and BRL formulations.</li><li><strong>Special focus on RF plasmas:</strong> Detailed treatment of measurement challenges in industrial RF plasmas, including RF compensation techniques.</li><li><strong>Practical analytical methods:</strong> Numerical algorithms and curve-fitting procedures for extracting key parameters like electron temperature and density.</li></ul><h3>Significance for Fusion Research</h3><p>In nuclear fusion projects like tokamaks, accurate measurement of plasma parameters is crucial. These notes provide an up-to-date reference helping researchers analyze probe data with greater accuracy.</p>`,
+      file: { name: 'Download PDF', url: 'https://raw.githubusercontent.com/amirerfanx/larmor/main/Langmuir%20Probe%20Diagnostics%20-%20F.F.Chen.pdf' }
+    }
+  }
+];
+
+// ===== STATE & DOM =====
+const VALID_PAGES = ['home', 'larmor', 'articles', 'education', 'about', 'contact'];
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const menuPanel = document.getElementById('menuPanel');
+const langSwitcher = document.getElementById('langSwitcher');
+const langLabel = document.getElementById('langLabel');
+const articleModal = document.getElementById('articleModal');
+const articleModalClose = document.getElementById('articleModalClose');
+const simModal = document.getElementById('simModal');
+const simModalClose = document.getElementById('simModalClose');
+let currentLang = localStorage.getItem('lang') || 'fa';
+let lastFocusedElement = null;
+
+// ===== LANGUAGE =====
+function getNestedValue(obj, key) { return key.split('.').reduce((acc, part) => acc && acc[part], obj); }
+
+function setLanguage(lang) {
+  if (!translations[lang]) return;
+  currentLang = lang;
+  localStorage.setItem('lang', lang);
+  const isFa = lang === 'fa';
+  document.documentElement.lang = lang;
+  document.documentElement.dir = isFa ? 'rtl' : 'ltr';
+  langLabel.textContent = isFa ? 'EN' : 'FA';
+  langSwitcher.setAttribute('aria-label', isFa ? 'Switch to English' : 'تغییر به فارسی');
+  
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    const value = getNestedValue(translations[lang], key);
+    if (value !== undefined) el.innerHTML = value;
+  });
+  document.title = translations[lang].title;
+  
+  const pageLabels = { fa: { home: 'خانه', larmor: 'لارمور', articles: 'مقالات', education: 'آموزش', about: 'درباره من', contact: 'ارتباط با من' }, en: { home: 'Home', larmor: 'Larmor', articles: 'Articles', education: 'Education', about: 'About Me', contact: 'Contact' } };
+  document.querySelectorAll('.page').forEach(section => {
+    const id = section.id.replace('page-', '');
+    if (pageLabels[lang][id]) section.setAttribute('aria-label', pageLabels[lang][id]);
+  });
+  
+  menuPanel.setAttribute('aria-label', isFa ? 'منوی اصلی' : 'Main menu');
+  hamburgerBtn.setAttribute('aria-label', isFa ? 'منو' : 'Menu');
+  articleModalClose.setAttribute('aria-label', translations[lang].modalClose);
+  simModalClose.setAttribute('aria-label', translations[lang].modalClose);
+  
+  renderArticles();
+  renderSimCard();
+}
+
+function toggleLanguage() { setLanguage(currentLang === 'fa' ? 'en' : 'fa'); }
+
+// ===== ARTICLES =====
+function renderArticles() {
+  const grid = document.getElementById('articlesGrid');
+  if (!grid) return;
+  const t = translations[currentLang].articles;
+  grid.innerHTML = '';
+  articlesData.forEach((article, index) => {
+    const data = article[currentLang];
+    const card = document.createElement('button');
+    card.type = 'button';
+    card.className = 'article-card';
+    card.setAttribute('aria-label', data.title);
+    card.onclick = () => openArticle(article.id);
+    card.innerHTML = `
+      <span class="article-number">${currentLang === 'fa' ? 'مقاله' : 'Article'} ${index + 1}</span>
+      <h3>${data.title}</h3>
+      <div class="article-date">📅 ${data.date}</div>
+      <p class="article-excerpt">${data.excerpt}</p>
+      <span class="read-more">${t.readMore}</span>
+      ${data.file ? `<span class="has-attachment">${t.hasFile}</span>` : ''}
+    `;
+    grid.appendChild(card);
+  });
+}
+
+// ===== SIMULATOR CARD =====
+function renderSimCard() {
+  const grid = document.getElementById('simGrid');
+  if (!grid) return;
+  const t = translations[currentLang].education.simulation.langmuir;
+  grid.innerHTML = '';
+  const card = document.createElement('button');
+  card.type = 'button';
+  card.className = 'sim-card';
+  card.setAttribute('aria-label', t.title);
+  card.onclick = () => openSimulator();
+  card.innerHTML = `
+    <span class="sim-number">💻</span>
+    <h3>${t.title}</h3>
+    <div class="sim-date"> ${t.subtitle}</div>
+    <p class="sim-excerpt">${t.desc}</p>
+    <span class="read-more">${t.readMore}</span>
+  `;
+  grid.appendChild(card);
+}
+
+// ===== ARTICLE MODAL =====
+function openArticle(articleId) {
+  const article = articlesData.find(a => a.id === articleId);
+  if (!article) return;
+  const data = article[currentLang];
+  const t = translations[currentLang].articles;
+  document.getElementById('articleModalTitle').textContent = data.title;
+  document.getElementById('articleModalDate').innerHTML = `${t.dateLabel} ${data.date}`;
+  document.getElementById('articleModalBody').innerHTML = data.content;
+  const footer = document.getElementById('articleModalFooter');
+  if (data.file) {
+    footer.innerHTML = `<a href="${data.file.url}" download class="download-btn" target="_blank" rel="noopener noreferrer">${t.download}</a>`;
+  } else {
+    footer.innerHTML = '';
+  }
+  lastFocusedElement = document.activeElement;
+  articleModal.classList.add('active');
+  articleModal.removeAttribute('inert');
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => articleModalClose.focus(), 100);
+}
+
+function closeArticleModal() {
+  articleModal.classList.remove('active');
+  articleModal.setAttribute('inert', '');
+  document.body.style.overflow = '';
+  if (lastFocusedElement) lastFocusedElement.focus();
+}
+
+// ===== SIMULATOR MODAL =====
+let simAnimationId = null;
+let simStatusEl = null;
+
+function openSimulator() {
+  const t = translations[currentLang].education.simulation.langmuir;
+  document.getElementById('simModalTitle').textContent = t.title;
+  document.getElementById('simModalSubtitle').textContent = t.subtitle;
+  
+  const body = document.getElementById('simModalBody');
+  body.innerHTML = `
+    <p class="sim-intro">${t.desc}</p>
+    <p class="sim-credits">✦ ${t.credits} ✦</p>
+    
+    <div class="sim-section-title">🔬 ${t.plasmaSection}</div>
+    <div class="sim-params">
+      <div class="sim-param-box">
+        <div class="param-header">
+          <span class="param-label">${t.teLabel}</span>
+          <span class="param-value" id="simTeVal">4.0 eV</span>
+        </div>
+        <input type="range" id="simTe" min="1" max="10" step="0.5" value="4.0">
+        <div class="param-desc">${t.teDesc}</div>
+      </div>
+      <div class="sim-param-box">
+        <div class="param-header">
+          <span class="param-label">${t.neLabel}</span>
+          <span class="param-value" id="simNeVal">2.0</span>
+        </div>
+        <input type="range" id="simNe" min="0.5" max="5.0" step="0.5" value="2.0">
+        <div class="param-desc">${t.teDesc}</div>
+      </div>
+    </div>
+
+    <div class="sim-section-title">⚡ ${t.capacitorSection}</div>
+    <div class="sim-params">
+      <div class="sim-param-box">
+        <div class="param-header">
+          <span class="param-label">${t.tauLabel}</span>
+          <span class="param-value" id="simTauVal">5.0 µs</span>
+        </div>
+        <input type="range" id="simTau" min="1" max="20" step="1" value="5.0">
+        <div class="param-desc">${t.tauDesc}</div>
+      </div>
+      <div class="sim-param-box">
+        <div class="param-header">
+          <span class="param-label">${t.dwellLabel}</span>
+          <span class="param-value" id="simDwellVal">5.0 τ</span>
+        </div>
+        <input type="range" id="simDwell" min="1" max="10" step="0.5" value="5.0">
+        <div class="param-desc">${t.dwellDesc}</div>
+      </div>
+    </div>
+    
+    <div class="sim-controls">
+      <button type="button" id="simBtnContinuous" class="sim-btn">${t.btnContinuous}</button>
+      <button type="button" id="simBtnStepped" class="sim-btn">${t.btnStepped}</button>
+      <div class="sim-speed-control">
+        <label>${t.speedLabel}:</label>
+        <select id="simSpeed">
+          <option value="fast">${t.speedFast}</option>
+          <option value="medium" selected>${t.speedMedium}</option>
+          <option value="slow">${t.speedSlow}</option>
+        </select>
+      </div>
+      <button type="button" id="simBtnClear" class="sim-btn secondary">${t.btnClear}</button>
+    </div>
+
+    <div style="text-align: center; color: var(--text-muted); font-size: 0.9em; margin-bottom: 10px;" id="simStatus">${t.statusReady}</div>
+
+    <canvas id="simCanvas" width="850" height="420"></canvas>
+    
+    <div class="sim-legend">
+      <span><span class="line-cyan"></span> ${t.legendPlasma}</span>
+      <span><span class="line-magenta"></span> ${t.legendContinuous}</span>
+      <span><span class="line-orange"></span> ${t.legendStepped}</span>
+      <span><span class="zone-green"></span> ${t.legendSettled}</span>
+    </div>
+    
+    <div class="sim-results">
+      <div class="sim-result-box">
+        <div class="result-label">${t.resultTeActual}</div>
+        <div class="result-value" id="resTeActual">4.0 eV</div>
+      </div>
+      <div class="sim-result-box">
+        <div class="result-label">${t.resultTeContinuous}</div>
+        <div class="result-value error" id="resTeContinuous">—</div>
+      </div>
+      <div class="sim-result-box">
+        <div class="result-label">${t.resultTeStepped}</div>
+        <div class="result-value success" id="resTeStepped">—</div>
+      </div>
+    </div>
+    
+    <p class="sim-footer-note">${t.footer}</p>
+  `;
+  
+  lastFocusedElement = document.activeElement;
+  simModal.classList.add('active');
+  simModal.removeAttribute('inert');
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => {
+    initSimulatorLogic();
+    simModalClose.focus();
+  }, 100);
+}
+
+function closeSimModal() {
+  if (simAnimationId) cancelAnimationFrame(simAnimationId);
+  simModal.classList.remove('active');
+  simModal.setAttribute('inert', '');
+  document.body.style.overflow = '';
+  if (lastFocusedElement) lastFocusedElement.focus();
+}
+
+function initSimulatorLogic() {
+  const simCanvas = document.getElementById('simCanvas');
+  if (!simCanvas) return;
+  const ctx = simCanvas.getContext('2d');
+  
+  const simTe = document.getElementById('simTe');
+  const simNe = document.getElementById('simNe');
+  const simTau = document.getElementById('simTau');
+  const simDwell = document.getElementById('simDwell');
+  const simTeVal = document.getElementById('simTeVal');
+  const simNeVal = document.getElementById('simNeVal');
+  const simTauVal = document.getElementById('simTauVal');
+  const simDwellVal = document.getElementById('simDwellVal');
+  const simBtnContinuous = document.getElementById('simBtnContinuous');
+  const simBtnStepped = document.getElementById('simBtnStepped');
+  const simBtnClear = document.getElementById('simBtnClear');
+  const simSpeed = document.getElementById('simSpeed');
+  const simStatus = document.getElementById('simStatus');
+  const resTeActual = document.getElementById('resTeActual');
+  const resTeContinuous = document.getElementById('resTeContinuous');
+  const resTeStepped = document.getElementById('resTeStepped');
+
+  const t = translations[currentLang].education.simulation.langmuir;
+
+  function updateLabels() {
+    if(simTeVal) simTeVal.textContent = parseFloat(simTe.value).toFixed(1) + ' eV';
+    if(simNeVal) simNeVal.textContent = parseFloat(simNe.value).toFixed(1);
+    if(simTauVal) simTauVal.textContent = parseFloat(simTau.value).toFixed(1) + ' µs';
+    if(simDwellVal) simDwellVal.textContent = parseFloat(simDwell.value).toFixed(1) + ' τ';
+    if(resTeActual) resTeActual.textContent = parseFloat(simTe.value).toFixed(1) + ' eV';
+  }
+
+  [simTe, simNe, simTau, simDwell].forEach(el => {
+    if(el) el.addEventListener('input', () => { updateLabels(); drawStaticCurve(); });
+  });
+
+  function getPlasmaCurrent(V, Te, ne) {
+    const Vp = 0;
+    const Iisat = -1.0 * ne;
+    const Iesat = 5.0 * ne;
+    if (V <= Vp) {
+      return Iisat * Math.exp((V - Vp) / Te);
+    } else {
+      return Iisat + (Iesat - Iisat) * (1 - Math.exp(-(V - Vp) / (Te * 2)));
+    }
+  }
+
+  function drawStaticCurve() {
+    const Te = parseFloat(simTe.value);
+    const ne = parseFloat(simNe.value);
+    const width = simCanvas.width;
+    const height = simCanvas.height;
+    ctx.clearRect(0, 0, width, height);
+    
+    // Grid
+    ctx.strokeStyle = 'rgba(139, 0, 255, 0.12)';
+    ctx.lineWidth = 1;
+    for (let i = 0; i <= 10; i++) {
+      ctx.beginPath(); ctx.moveTo((i/10)*width, 0); ctx.lineTo((i/10)*width, height); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(0, (i/10)*height); ctx.lineTo(width, (i/10)*height); ctx.stroke();
+    }
+    
+    // Axes
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+    ctx.lineWidth = 2;
+    const zeroI_Y = height - ((0 - (-10)) / (30 - (-10))) * height;
+    ctx.beginPath(); ctx.moveTo(0, zeroI_Y); ctx.lineTo(width, zeroI_Y); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(width * 0.5, 0); ctx.lineTo(width * 0.5, height); ctx.stroke();
+    
+    // Axis labels
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+    ctx.font = '12px Vazirmatn, Inter, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('V (Volts)', width - 40, zeroI_Y - 10);
+    ctx.save();
+    ctx.translate(15, height/2);
+    ctx.rotate(-Math.PI/2);
+    ctx.fillText('I (A)', 0, 0);
+    ctx.restore();
+
+    // True plasma curve
+    ctx.strokeStyle = '#00ffff';
+    ctx.lineWidth = 3;
+    ctx.shadowColor = '#00ffff';
+    ctx.shadowBlur = 8;
+    ctx.beginPath();
+    for (let px = 0; px <= width; px++) {
+      const V = -20 + (px / width) * 40;
+      const I = getPlasmaCurrent(V, Te, ne);
+      const py = height - ((I - (-10)) / (30 - (-10))) * height;
+      if (px === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+    }
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+  }
+
+  function runSweep(mode) {
+    if (simAnimationId) cancelAnimationFrame(simAnimationId);
+    let progress = 0;
+    const Te = parseFloat(simTe.value);
+    const ne = parseFloat(simNe.value);
+    const tau = parseFloat(simTau.value);
+    const dwell = parseFloat(simDwell.value);
+    const speed = simSpeed.value;
+    const speedMultiplier = speed === 'fast' ? 2.5 : speed === 'slow' ? 0.5 : 1.0;
+    const strayOffset = (4.0 * ne) / (tau / 1.5); 
+
+    if (simStatus) simStatus.textContent = t.statusRunning;
+
+    function animate() {
+      drawStaticCurve();
+      progress += 0.006 * speedMultiplier;
+      if (progress > 1) { 
+        progress = 1; 
+        drawMeasuredCurve(progress, mode, strayOffset, Te, ne, tau, dwell);
+        // Estimate Te
+        if (mode === 'continuous' && resTeContinuous) {
+          const estimatedTe = Te * (1 + strayOffset / (5 * ne));
+          resTeContinuous.textContent = estimatedTe.toFixed(2) + ' eV';
+        } else if (mode === 'stepped' && resTeStepped) {
+          resTeStepped.textContent = Te.toFixed(2) + ' eV';
+        }
+        if (simStatus) simStatus.textContent = t.statusDone;
+        return; 
+      }
+      drawMeasuredCurve(progress, mode, strayOffset, Te, ne, tau, dwell);
+      simAnimationId = requestAnimationFrame(animate);
+    }
+    animate();
+  }
+
+  function drawMeasuredCurve(progress, mode, strayOffset, Te, ne, tau, dwell) {
+    const width = simCanvas.width;
+    const height = simCanvas.height;
+    const isStepped = mode === 'stepped';
+    
+    ctx.strokeStyle = isStepped ? '#ff8c00' : '#ff00ff';
+    ctx.lineWidth = 3;
+    ctx.setLineDash(isStepped ? [4, 4] : [8, 4]);
+    ctx.beginPath();
+    const maxPx = Math.floor(progress * width);
+    for (let px = 0; px <= maxPx; px++) {
+      const V = -20 + (px / width) * 40;
+      let I = getPlasmaCurrent(V, Te, ne);
+      if (!isStepped) { 
+        I += strayOffset; 
+      } else { 
+        // Stepped: transient decays with exp(-t/τ), sampling after dwell*τ
+        const t_norm = px / width;
+        const decay = Math.exp(-dwell);
+        I += strayOffset * decay * Math.sin(px * 0.2);
+      }
+      const py = height - ((I - (-10)) / (30 - (-10))) * height;
+      if (px === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+    }
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Settled zone highlight for stepped mode
+    if (isStepped && dwell >= 5) {
+      ctx.fillStyle = 'rgba(0, 255, 100, 0.08)';
+      ctx.fillRect(0, 0, width, height);
+    }
+  }
+
+  if(simBtnContinuous) simBtnContinuous.addEventListener('click', () => runSweep('continuous'));
+  if(simBtnStepped) simBtnStepped.addEventListener('click', () => runSweep('stepped'));
+  if(simBtnClear) simBtnClear.addEventListener('click', () => { 
+    if (simAnimationId) cancelAnimationFrame(simAnimationId); 
+    if(resTeContinuous) resTeContinuous.textContent = '—';
+    if(resTeStepped) resTeStepped.textContent = '—';
+    if (simStatus) simStatus.textContent = t.statusReady;
+    drawStaticCurve(); 
+  });
+  
+  updateLabels();
+  drawStaticCurve();
+}
+
+// ===== NAVIGATION =====
+function openMenu() {
+  hamburgerBtn.classList.add('active');
+  hamburgerBtn.setAttribute('aria-expanded', 'true');
+  menuPanel.classList.add('active');
+  menuPanel.removeAttribute('inert');
+  const firstItem = menuPanel.querySelector('.menu-item');
+  if (firstItem) firstItem.focus();
+}
+function closeMenu() {
+  hamburgerBtn.classList.remove('active');
+  hamburgerBtn.setAttribute('aria-expanded', 'false');
+  menuPanel.classList.remove('active');
+  menuPanel.setAttribute('inert', '');
+}
+function toggleMenu() { if (menuPanel.classList.contains('active')) closeMenu(); else openMenu(); }
+
+function showPage(pageName, pushHistory = true) {
+  if (!VALID_PAGES.includes(pageName)) pageName = 'home';
+  document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+  const selectedPage = document.getElementById(`page-${pageName}`);
+  if (selectedPage) selectedPage.classList.add('active');
+  document.querySelectorAll('.menu-item').forEach(item => {
+    item.setAttribute('aria-current', item.dataset.page === pageName ? 'page' : 'false');
+  });
+  if (pushHistory && location.hash.slice(1) !== pageName) {
+    history.pushState({ page: pageName }, '', `#${pageName}`);
+  }
+  closeMenu();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ===== EVENT LISTENERS =====
+window.addEventListener('popstate', (event) => {
+  const page = (event.state && event.state.page) || location.hash.slice(1) || 'home';
+  showPage(page, false);
+});
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    if (articleModal.classList.contains('active')) closeArticleModal();
+    else if (simModal.classList.contains('active')) closeSimModal();
+    else if (menuPanel.classList.contains('active')) { closeMenu(); hamburgerBtn.focus(); }
+  }
+});
+document.addEventListener('click', (event) => {
+  if (!menuPanel.contains(event.target) && !hamburgerBtn.contains(event.target)) closeMenu();
+  if (event.target === articleModal) closeArticleModal();
+  if (event.target === simModal) closeSimModal();
+});
+langSwitcher.addEventListener('click', toggleLanguage);
+articleModalClose.addEventListener('click', closeArticleModal);
+simModalClose.addEventListener('click', closeSimModal);
+
+// ===== INIT =====
+document.getElementById('year').textContent = new Date().getFullYear();
+setLanguage(currentLang);
+showPage(location.hash.slice(1) || 'home', false);
+</script>
+</body>
+</html>
